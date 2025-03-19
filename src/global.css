@@ -20,4 +20,18 @@
   margin: 0;
   box-sizing: border-box;
   font-size: 1.6rem;
+  font-family: 'Inter', sans-serif;
+}
+
+input,
+button {
+  border: none;
+  background: none;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: var(--gray-600);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
