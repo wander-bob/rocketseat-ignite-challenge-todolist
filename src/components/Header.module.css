@@ -1,0 +1,6 @@
+.header {
+  width: 100%;
+  text-align: center;
+  padding-block: 7.2rem 8rem;
+  background-color: var(--gray-700);
+}
