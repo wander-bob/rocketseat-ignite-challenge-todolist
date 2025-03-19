@@ -1,0 +1,47 @@
+.task-container {
+  margin-top: 6.5rem;
+}
+
+.task-status-board {
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-counter {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.opened-tasks {
+  font-size: 1.4rem;
+  color: var(--blue-400);
+}
+
+.closed-tasks {
+  font-size: 1.4rem;
+  color: var(--purple-400);
+}
+
+.counter {
+  font-size: 1.2rem;
+  background: var(--gray-400);
+  color: var(--gray-200);
+  padding-inline: 0.8rem;
+  border-radius: 50%;
+}
+
+.task-list {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.task-list-empty {
+  border-radius: 0.8rem;
+  border-top: var(--gray-400) 1px solid;
+  padding: 6.4rem 2.4rem;
+  text-align: center;
+  line-height: 140%;
+  color: var(--gray-300);
+}
