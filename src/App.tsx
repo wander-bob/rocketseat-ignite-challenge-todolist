@@ -3,34 +3,49 @@ import { Header } from './components/Header';
 import styles from './App.module.css';
 import { Input } from './components/Input';
 import { TaskDashboard } from './components/TaskDaskboard';
+import { ChangeEvent, useState } from 'react';
 
-interface Task {
+export interface TaskProps {
+  id: string;
   content: string;
   checked: boolean;
 }
 
-// const tasks: Task[] = [];
-const tasks: Task[] = [
-  {
-    content:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores uteligendi optio eos aut perspiciatis.',
-    checked: false,
-  },
-  {
-    content:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores uteligendi optio eos aut perspiciatis.',
-    checked: true,
-  },
-];
-
 export function App() {
+  const [tasks, setTasks] = useState<TaskProps[]>([]);
+  const [taskContent, setTaskContent] = useState('');
+
+  function handleTaskContent(element: ChangeEvent<HTMLInputElement>) {
+    setTaskContent(element.target.value);
+  }
+
+  function handleAddNewTask() {
+    const newTask = {
+      id: crypto.randomUUID(),
+      content: taskContent,
+      checked: false,
+    };
+
+    setTasks([...tasks, newTask]);
+    setTaskContent('');
+  }
+
+  function handleDeleteTask(taskToDeleteID: string) {
+    const filteredTasks = tasks.filter((task) => task.id !== taskToDeleteID);
+    setTasks(filteredTasks);
+  }
+
   return (
     <div className={styles.wrapper}>
       <Header />
       <main>
-        <Input />
+        <Input
+          onChange={handleTaskContent}
+          value={taskContent}
+          onCreateNewTask={handleAddNewTask}
+        />
 
-        <TaskDashboard data={tasks} />
+        <TaskDashboard data={tasks} onDeleteTask={handleDeleteTask} />
       </main>
     </div>
   );

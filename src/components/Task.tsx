@@ -5,22 +5,30 @@ import checkedIcon from '../assets/checked.svg';
 import { useState } from 'react';
 
 interface TaskProps {
+  taskId: string;
   content: string;
+  onDelete: (id: string) => void;
 }
 
-export function Task({ content }: TaskProps) {
+export function Task({ taskId, content, onDelete }: TaskProps) {
   const [isChecked, setIsChecked] = useState(false);
 
   function handleTaskChecked() {
     setIsChecked(!isChecked);
   }
+
+  function handleDeleteTask() {
+    console.log(taskId);
+    onDelete(taskId);
+  }
+
   return (
     <div className={styles.task}>
       <button onClick={handleTaskChecked}>
         {isChecked ? <img src={checkedIcon} /> : <img src={checkIcon} />}
       </button>
       <p className={!isChecked ? '' : styles.isChecked}>{content}</p>
-      <button className={styles.delete}>
+      <button className={styles.delete} onClick={handleDeleteTask}>
         <svg
           width="24"
           height="24"

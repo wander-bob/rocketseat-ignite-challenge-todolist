@@ -2,17 +2,14 @@ import styles from './TaskDaskboard.module.css';
 import clipboard from '../assets/clipboard.svg';
 
 import { Task } from './Task';
-
-interface Data {
-  content: string;
-  checked: boolean;
-}
+import { TaskProps } from '../App';
 
 interface DataProps {
-  data: Data[];
+  data: TaskProps[];
+  onDeleteTask: (id: string) => void;
 }
 
-export function TaskDashboard({ data }: DataProps) {
+export function TaskDashboard({ data, onDeleteTask }: DataProps) {
   return (
     <div className={styles['task-container']}>
       <div className={styles['task-status-board']}>
@@ -27,7 +24,14 @@ export function TaskDashboard({ data }: DataProps) {
       </div>
       <div className={styles['task-list']}>
         {data.length > 0 ? (
-          data.map((task) => <Task content={task.content} />)
+          data.map((task) => (
+            <Task
+              key={task.id}
+              taskId={task.id}
+              content={task.content}
+              onDelete={onDeleteTask}
+            />
+          ))
         ) : (
           <div className={styles['task-list-empty']}>
             <img src={clipboard} alt="Taskboard vazia" />
