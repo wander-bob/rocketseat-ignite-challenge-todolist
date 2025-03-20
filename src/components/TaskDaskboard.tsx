@@ -2,9 +2,17 @@ import styles from './TaskDaskboard.module.css';
 import clipboard from '../assets/clipboard.svg';
 
 import { Task } from './Task';
-import { useState } from 'react';
 
-export function TaskDashboard() {
+interface Data {
+  content: string;
+  checked: boolean;
+}
+
+interface DataProps {
+  data: Data[];
+}
+
+export function TaskDashboard({ data }: DataProps) {
   return (
     <div className={styles['task-container']}>
       <div className={styles['task-status-board']}>
@@ -18,20 +26,15 @@ export function TaskDashboard() {
         </div>
       </div>
       <div className={styles['task-list']}>
-        {/* <div className={styles['task-list-empty']}>
-          <img src={clipboard} alt="Taskboard vazia" />
-          <h3>Você ainda não tem tarefas cadastradas</h3>
-          <p>Crie tarefas e organize seus itens a fazer</p>
-        </div> */}
-
-        <Task
-          content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores ut
-        eligendi optio eos aut perspiciatis."
-        />
-        <Task
-          content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores ut
-        eligendi optio eos aut perspiciatis."
-        />
+        {data.length > 0 ? (
+          data.map((task) => <Task content={task.content} />)
+        ) : (
+          <div className={styles['task-list-empty']}>
+            <img src={clipboard} alt="Taskboard vazia" />
+            <h3>Você ainda não tem tarefas cadastradas</h3>
+            <p>Crie tarefas e organize seus itens a fazer</p>
+          </div>
+        )}
       </div>
     </div>
   );
