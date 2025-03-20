@@ -18,7 +18,6 @@ export function Task({ taskId, content, onDelete }: TaskProps) {
   }
 
   function handleDeleteTask() {
-    console.log(taskId);
     onDelete(taskId);
   }
 
