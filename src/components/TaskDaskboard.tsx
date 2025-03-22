@@ -4,32 +4,47 @@ import clipboard from '../assets/clipboard.svg';
 import { Task } from './Task';
 import { TaskProps } from '../App';
 
-interface DataProps {
-  data: TaskProps[];
+interface Props {
+  tasks: TaskProps[];
+  completedTasks: number;
   onDeleteTask: (id: string) => void;
+  onToggleTaskStatus: (id: string, status: boolean) => void;
 }
 
-export function TaskDashboard({ data, onDeleteTask }: DataProps) {
+export function TaskDashboard({
+  tasks,
+  completedTasks,
+  onDeleteTask,
+  onToggleTaskStatus,
+}: Props) {
+  function handleToggleTaskStatus(taskId: string, status: boolean) {
+    onToggleTaskStatus(taskId, status);
+  }
+
   return (
     <div className={styles['task-container']}>
       <div className={styles['task-status-board']}>
         <div className={styles['task-counter']}>
           <strong className={styles['opened-tasks']}>Tarefas criadas</strong>
-          <span className={styles.counter}>0</span>
+          <span className={styles.counter}>{tasks.length}</span>
         </div>
         <div className={styles['task-counter']}>
           <strong className={styles['closed-tasks']}>Concluídas</strong>
-          <span className={styles.counter}>0</span>
+          <span className={styles.counter}>
+            {tasks.length && `${completedTasks} de ${tasks.length}`}
+          </span>
         </div>
       </div>
       <div className={styles['task-list']}>
-        {data.length > 0 ? (
-          data.map((task) => (
+        {tasks.length > 0 ? (
+          tasks.map((task) => (
             <Task
               key={task.id}
               taskId={task.id}
+              checked={task.checked}
               content={task.content}
               onDelete={onDeleteTask}
+              onChecked={handleToggleTaskStatus}
             />
           ))
         ) : (

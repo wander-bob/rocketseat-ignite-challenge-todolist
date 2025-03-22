@@ -15,6 +15,13 @@ export function App() {
   const [tasks, setTasks] = useState<TaskProps[]>([]);
   const [taskContent, setTaskContent] = useState('');
 
+  const finishedTasks = tasks.reduce((prev, task) => {
+    if (task.checked) {
+      return prev + 1;
+    }
+    return prev;
+  }, 0);
+
   function handleTaskContent(event: ChangeEvent<HTMLInputElement>) {
     event.target.setCustomValidity('');
     setTaskContent(event.target.value);
@@ -42,6 +49,16 @@ export function App() {
     setTasks(filteredTasks);
   }
 
+  function handleTaskStatus(id: string, status: boolean) {
+    const updatedTasksList = tasks.map((task) => {
+      if (task.id === id) {
+        return { ...task, checked: status };
+      }
+      return { ...task };
+    });
+    setTasks(updatedTasksList);
+  }
+
   return (
     <div className={styles.wrapper}>
       <Header />
@@ -56,7 +73,12 @@ export function App() {
           />
         </form>
 
-        <TaskDashboard data={tasks} onDeleteTask={handleDeleteTask} />
+        <TaskDashboard
+          tasks={tasks}
+          completedTasks={finishedTasks}
+          onDeleteTask={handleDeleteTask}
+          onToggleTaskStatus={handleTaskStatus}
+        />
       </main>
     </div>
   );

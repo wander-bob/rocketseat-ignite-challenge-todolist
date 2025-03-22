@@ -7,14 +7,23 @@ import { useState } from 'react';
 interface TaskProps {
   taskId: string;
   content: string;
+  checked: boolean;
   onDelete: (id: string) => void;
+  onChecked: (id: string, status: boolean) => void;
 }
 
-export function Task({ taskId, content, onDelete }: TaskProps) {
-  const [isChecked, setIsChecked] = useState(false);
+export function Task({
+  taskId,
+  content,
+  checked,
+  onDelete,
+  onChecked,
+}: TaskProps) {
+  const [isChecked, setIsChecked] = useState(checked);
 
   function handleTaskChecked() {
     setIsChecked(!isChecked);
+    onChecked(taskId, !isChecked);
   }
 
   function handleDeleteTask() {
