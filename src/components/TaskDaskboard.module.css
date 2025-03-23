@@ -1,5 +1,6 @@
 .task-container {
   margin-top: 6.5rem;
+  /* max-width: fit-content; */
 }
 
 .task-status-board {
@@ -23,11 +24,18 @@
 }
 
 .counter {
-  font-size: 1.2rem;
   background: var(--gray-400);
-  color: var(--gray-200);
   padding-inline: 0.8rem;
-  border-radius: 50%;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.counter>span {
+  color: var(--gray-200);
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 .task-list {

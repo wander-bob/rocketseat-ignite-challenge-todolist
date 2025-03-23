@@ -26,13 +26,17 @@ export function TaskDashboard({
       <div className={styles['task-status-board']}>
         <div className={styles['task-counter']}>
           <strong className={styles['opened-tasks']}>Tarefas criadas</strong>
-          <span className={styles.counter}>{tasks.length}</span>
+          <div className={styles.counter}>
+            <span>{tasks.length}</span>
+          </div>
         </div>
         <div className={styles['task-counter']}>
           <strong className={styles['closed-tasks']}>Concluídas</strong>
-          <span className={styles.counter}>
-            {tasks.length && `${completedTasks} de ${tasks.length}`}
-          </span>
+          <div className={styles.counter}>
+            <span>
+              {tasks.length && `${completedTasks} de ${tasks.length}`}
+            </span>
+          </div>
         </div>
       </div>
       <div className={styles['task-list']}>
