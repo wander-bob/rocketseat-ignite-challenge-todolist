@@ -5,3 +5,15 @@
 .wrapper main {
   padding-inline: 35.2rem;
 }
+
+@media (max-width:1024px) {
+  .wrapper main {
+    padding-inline: 6.4rem;
+  }
+}
+
+@media (max-width:768px) {
+  .wrapper main {
+    padding-inline: 4rem;
+  }
+}
